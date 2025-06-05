@@ -14,7 +14,7 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!form.email || !form.username || !form.password) {
       alert("Por favor, completa todos los campos.");
       return;
@@ -26,7 +26,7 @@ export default function Register() {
         username: form.username,
         password: form.password,
       });
-      
+
       if (response.success) {
         alert("Registro exitoso. Ahora puedes iniciar sesión.");
         setForm({ email: "", username: "", password: "" });
@@ -37,17 +37,14 @@ export default function Register() {
   };
 
   return (
-    <div className="m-30 flex items-center justify-center">
-      <div className="max-w-md w-full bg-blue-900 border border-blue-500 rounded-2xl shadow-lg p-8">
-        <h2 className="text-4xl font-bold text-center text-white mb-6">
-          Registrarse
+    <div className="m-20 flex items-center justify-center bg-neutral-900">
+      <div className="max-w-md w-full bg-neutral-900 border border-primary-500 rounded-2xl shadow-lg p-8">
+        <h2 className="text-3xl font-bold text-center text-neutral-50 mb-6">
+          Sign up
         </h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label
-              htmlFor="email"
-              className="block text-base text-blue-200 mb-1"
-            >
+            <label htmlFor="email" className="block text-neutral-400 mb-1">
               Email
             </label>
             <input
@@ -57,16 +54,13 @@ export default function Register() {
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-blue-700 rounded-lg bg-blue-800 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-primary-500 rounded-lg bg-neutral-900 text-neutral-50 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Type your email"
             />
           </div>
           <div>
-            <label
-              htmlFor="username"
-              className="block text-base text-blue-200 mb-1"
-            >
-              Usuario
+            <label htmlFor="username" className="block text-neutral-400 mb-1">
+              Username
             </label>
             <input
               type="text"
@@ -75,16 +69,13 @@ export default function Register() {
               value={form.username}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-blue-700 rounded-lg bg-blue-800 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-primary-500 rounded-lg bg-neutral-900 text-neutral-50 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Type your username"
             />
           </div>
           <div>
-            <label
-              htmlFor="password"
-              className="block text-base text-blue-200 mb-1"
-            >
-              Contraseña
+            <label htmlFor="password" className="block text-neutral-400 mb-1">
+              Password
             </label>
             <input
               type="password"
@@ -93,15 +84,15 @@ export default function Register() {
               value={form.password}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-blue-700 rounded-lg bg-blue-800 text-white placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-primary-500 rounded-lg bg-neutral-900 text-neutral-50 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Type your password"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-lg transition duration-300"
+            className="w-full py-3 bg-primary-500 hover:bg-primary-700 text-neutral-50 font-semibold rounded-lg transition duration-300"
           >
-            Registrarse
+            Sign up
           </button>
         </form>
       </div>

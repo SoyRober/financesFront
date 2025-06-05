@@ -17,7 +17,7 @@ const Login: React.FC = () => {
     try {
       const response = await fetchData("/public/login", "POST", {
         username: username,
-        password: password
+        password: password,
       });
 
       if (response.success) {
@@ -34,37 +34,37 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="m-20 flex items-center justify-center bg-[#16161a]">
-      <div className="max-w-md w-full bg-[#16161a] border border-[#7f5af0] rounded-2xl shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-[#fffffe] mb-6">
+    <div className="m-20 flex items-center justify-center bg-neutral-900">
+      <div className="max-w-md w-full bg-neutral-900 border border-primary-500 rounded-2xl shadow-lg p-8">
+        <h2 className="text-3xl font-bold text-center text-neutral-50 mb-6">
           Log in
         </h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-[#94a1b2] mb-1">Username</label>
+            <label className="block text-neutral-50 mb-1">Username</label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 border border-[#7f5af0] rounded-lg bg-[#16161a] text-[#fffffe] placeholder-[#72757e] focus:outline-none focus:ring-2 focus:ring-[#7f5af0]"
+              className="w-full p-3 border border-primary-500 rounded-lg bg-neutral-900 text-neutral-50 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
               autoComplete="username"
               placeholder="Type your username"
             />
           </div>
           <div>
-            <label className="block text-[#94a1b2] mb-1">Password</label>
+            <label className="block text-neutral-50 mb-1">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-[#7f5af0] rounded-lg bg-[#16161a] text-[#fffffe] placeholder-[#72757e] focus:outline-none focus:ring-2 focus:ring-[#7f5af0]"
+              className="w-full p-3 border border-primary-500 rounded-lg bg-neutral-900 text-neutral-50 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
               autoComplete="current-password"
               placeholder="Type your password"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-[#7f5af0] hover:bg-[#5a3bc4] text-[#fffffe] font-semibold rounded-lg transition duration-300"
+            className="w-full py-3 bg-primary-500 hover:bg-primary-700 text-neutral-50 font-semibold rounded-lg transition duration-300"
           >
             Log in
           </button>

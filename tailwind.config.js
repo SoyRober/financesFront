@@ -1,32 +1,17 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"], // 👈 esto permite detectar clases usadas en React
   theme: {
     extend: {
       colors: {
-        footer: {
-          background: '#16161a',
-          headline: '#fffffe',
-          paragraph: '#94a1b2',
-          link: '#7f5af0',
-        },
-        card: {
-          background: '#242629',
-          headline: '#fffffe',
-          paragraph: '#94a1b2',
-          tagBackground: '#7f5af0',
-          tagText: '#fffffe',
-          highlight: '#fffffe',
-        },
-        body: {
-          background: '#16161a',
-          highlight: '#7f5af0',
-          tertiary: '#2cb67d',
-          secondary: '#72757e',
-          main: '#fffffe',
-        },
+        primary: "#7f5af0",
+        primaryDark: "#5a3bc4",
+        background: "#16161a",
+        textMain: "#fffffe",
+        textSecondary: "#94a1b2",
+        placeholder: "#72757e",
       },
     },
   },
   plugins: [],
-}
+};
