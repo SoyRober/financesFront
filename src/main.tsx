@@ -37,7 +37,8 @@ if (!container) {
 const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider maxSnack={5} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+
       <AuthProvider>
         <NotificationProvider>
           <div className="bg-[#16161a] min-h-screen text-white">

@@ -14,7 +14,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username || !password) {
-      alert("Por favor, completa todos los campos.");
+      notify("Please fill in all fields", "info");
       return;
     }
 

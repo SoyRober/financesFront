@@ -15,11 +15,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const notify = (message: string, type: NotificationType = "info") => {
     enqueueSnackbar(message, {
       variant: type,
-      autoHideDuration: 3000,
-      anchorOrigin: {
-        vertical: "bottom",
-        horizontal: "right"
-      }
+      autoHideDuration: 3000
     });
   };
 
