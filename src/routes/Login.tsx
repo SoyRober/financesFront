@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import fetchData from "../utils/fetchData";
+import { useNotification } from "../context/NotificationContext";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
+  const { notify } = useNotification();
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,19 +26,20 @@ const Login: React.FC = () => {
 
       if (response.success) {
         localStorage.setItem("token", response.message);
-        navigate("/");
+        notify("Logged in successfully", "success");
+        navigate("/dashboard/overview");
       } else {
-        alert("Error al iniciar sesión: " + response.message);
+        notify(response.message, "error");
         setUsername("");
         setPassword("");
       }
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      notify(error instanceof Error && error.message ? error.message : "Error while logging in", "error");
     }
   };
 
   return (
-    <div className="m-20 flex items-center justify-center bg-neutral-900">
+    <div className="p-20 flex items-center justify-center bg-neutral-900">
       <div className="max-w-md w-full bg-neutral-900 border border-primary-500 rounded-2xl shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center text-neutral-50 mb-6">
           Log in
@@ -69,6 +74,12 @@ const Login: React.FC = () => {
             Log in
           </button>
         </form>
+        <p className="mt-4 text-center text-neutral-400">
+          Already own an account?
+          <Link to="/register" className="text-primary-500 underline mx-2">
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );

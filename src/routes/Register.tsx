@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import fetchData from "../utils/fetchData";
+import { useNotification } from "../context/NotificationContext";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -7,6 +9,10 @@ export default function Register() {
     username: "",
     password: "",
   });
+
+  const { notify } = useNotification();
+  
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,7 +22,7 @@ export default function Register() {
     e.preventDefault();
 
     if (!form.email || !form.username || !form.password) {
-      alert("Por favor, completa todos los campos.");
+      notify("Every field is needed", "info");
       return;
     }
 
@@ -28,16 +34,19 @@ export default function Register() {
       });
 
       if (response.success) {
-        alert("Registro exitoso. Ahora puedes iniciar sesión.");
+        notify("Registered successfully", "success");
         setForm({ email: "", username: "", password: "" });
+        setTimeout(() => navigate("/login"), 1000); 
+      } else {
+        notify(response.message || "Something went wrong with the sign up", "error");
       }
-    } catch (error) {
-      console.error("Error al registrarse:", error);
+    } catch (error: any) {
+      notify(error.message || "Something went wrong with the sign up", "error");
     }
   };
 
   return (
-    <div className="m-20 flex items-center justify-center bg-neutral-900">
+    <div className="p-20 flex items-center justify-center bg-neutral-900">
       <div className="max-w-md w-full bg-neutral-900 border border-primary-500 rounded-2xl shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center text-neutral-50 mb-6">
           Sign up
@@ -95,6 +104,12 @@ export default function Register() {
             Sign up
           </button>
         </form>
+        <p className="mt-4 text-center text-neutral-400">
+          Already own an account?
+          <Link to="/login" className="text-primary-500 underline mx-2">
+            Log in
+          </Link>
+        </p>
       </div>
     </div>
   );

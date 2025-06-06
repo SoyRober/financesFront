@@ -1,28 +1,31 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
+import { SnackbarProvider } from 'notistack';
 import Loading from "./components/Loading";
 import "./index.css";
+import { NotificationProvider } from "./context/NotificationContext";
+import { AuthProvider } from "./context/AuthContext";
 
-const Navbar = lazy(() => import("./components/Navbar"));
 const Login = lazy(() => import("./routes/Login"));
 const Register = lazy(() => import("./routes/Register"));
+const Overview = lazy(() => import("./routes/Overview"));
+const DashboardLayout = lazy(() => import("./components/dashboard/DashboardLayout"));
 
 const router = createBrowserRouter([
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
   {
     path: "/",
-    element: <Navbar />,
+    element: <Navigate to="/register" replace /> 
+  },
+  {
+    element: <DashboardLayout><Outlet /></DashboardLayout>,
     children: [
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
+      { path: "dashboard/overview", element: <Overview /> },
     ],
   },
+  { path: "*", element: <Navigate to="/register" /> },
 ]);
 
 const container = document.getElementById("root");
@@ -31,25 +34,19 @@ if (!container) {
   throw new Error("No se encontró el elemento raíz #root");
 }
 
-if (!container._reactRootContainer) {
-  const root = ReactDOM.createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <div className="bg-[#16161a] min-h-screen">
-        <Suspense fallback={<Loading />}>
-          <RouterProvider router={router} />
-        </Suspense>
-      </div>
-    </React.StrictMode>
-  );
-} else {
-  container._reactRootContainer.render(
-    <React.StrictMode>
-      <div className="bg-[#16161a] min-h-screen">
-        <Suspense fallback={<Loading />}>
-          <RouterProvider router={router} />
-        </Suspense>
-      </div>
-    </React.StrictMode>
-  );
-}
+const root = ReactDOM.createRoot(container);
+root.render(
+  <React.StrictMode>
+    <SnackbarProvider maxSnack={3}>
+      <AuthProvider>
+        <NotificationProvider>
+          <div className="bg-[#16161a] min-h-screen text-white">
+            <Suspense fallback={<Loading />}>
+              <RouterProvider router={router} />
+            </Suspense>
+          </div>
+        </NotificationProvider>
+      </AuthProvider>
+    </SnackbarProvider>
+  </React.StrictMode>
+);
