@@ -6,9 +6,9 @@ import { useNotification } from "../context/NotificationContext";
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const { notify } = useNotification();
-  
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
       });
 
       if (response.success) {
-        localStorage.setItem("token", response.message);
+        localStorage.setItem("token", response.message as string);
         notify("Logged in successfully", "success");
         navigate("/dashboard/overview");
       } else {
@@ -34,7 +34,12 @@ const Login: React.FC = () => {
         setPassword("");
       }
     } catch (error) {
-      notify(error instanceof Error && error.message ? error.message : "Error while logging in", "error");
+      notify(
+        error instanceof Error && error.message
+          ? error.message
+          : "Error while logging in",
+        "error"
+      );
     }
   };
 
