@@ -2,8 +2,10 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
-  { label: "Overview", to: "/overview" },
-  { label: "Settings", to: "/settings" },
+  { label: "Overview", to: "/dashboard/overview" },
+  { label: "Settings", to: "/dashboard/settings" },
+  { label: "Boards", to: "/dashboard/boards" },
+  { label: "Create board", to: "/dashboard/create-board" },
 ];
 
 const profileItem = [
